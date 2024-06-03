@@ -1,0 +1,22 @@
+version: '3'
+services:
+  chatappui:
+    network_mode: host
+    build: /root/Desktop/Apps/ChatApp/ChatAppUI/
+    ports:
+      - "4200:80"
+  chatappapi:
+    network_mode: host
+    build: /root/Desktop/Apps/ChatApp/ChatAppBackend/
+    ports:
+      - "3000:80"
+  nginx:
+    network_mode: host
+    build: /root/Desktop/Apps/Server/
+    ports:
+      - '80:80'
+    volumes:
+      - /root/Desktop/Apps/Server/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - chatappui
+      - chatappapi
