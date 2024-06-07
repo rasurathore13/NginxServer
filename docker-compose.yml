@@ -1,20 +1,26 @@
 version: '3'
 services:
   chatappui:
-    network_mode: host
-    build: /root/Desktop/Apps/ChatApp/ChatAppUI/
+    build:
+      context: /root/Desktop/Apps/ChatApp/ChatAppUI/
+      network: host
+      dockerfile: Dockerfile
     ports:
       - "4200:80"
   chatappapi:
-    network_mode: host
-    build: /root/Desktop/Apps/ChatApp/ChatAppBackend/
+    build:
+      context: /root/Desktop/Apps/ChatApp/ChatAppBackend/
+      network: host
+      dockerfile: Dockerfile
     ports:
       - "3000:80"
   nginx:
-    network_mode: host
-    build: /root/Desktop/Apps/Server/
+    build:
+      context: /root/Desktop/Apps/Server/
+      network: host
+      dockerfile: Dockerfile
     ports:
-      - '80:80'
+      - "80:80"
     volumes:
       - /root/Desktop/Apps/Server/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
